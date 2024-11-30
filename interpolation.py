@@ -40,6 +40,7 @@ def interpolate_temperature(x, y, temp, resolution=5000):
 def setup_map(projection, extent):
     """Set up a Cartopy map with specific features."""
     fig = plt.figure(figsize=(14, 8))
+    add_metpy_logo(fig, 50, 50, size="small")
     ax = fig.add_subplot(1, 1, 1, projection=projection)
     ax.set_extent(extent)
 
