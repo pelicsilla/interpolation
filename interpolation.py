@@ -12,6 +12,36 @@ def load_data(filepath):
     """Load data from a CSV file."""
     return pd.read_csv(filepath, delimiter=",")
 
+def get_reference_datetime(data, datetime_column="RefDateTime"):
+    """
+    Extract the reference date and time from the data.
+
+    Parameters:
+    - data: DataFrame containing the data
+    - datetime_column: Name of the column with reference datetime
+
+    Returns:
+    - A datetime object representing the reference date and time
+    """
+    if datetime_column in data.columns:
+        return pd.to_datetime(data[datetime_column].iloc[0])  # get the first value
+    else:
+        raise KeyError(f"'{datetime_column}' column not found in the data.")
+
+
+def add_reference_datetime(ax, refdatetime):
+    """Add reference date and time to the map."""
+    # date and time is written in the left corner
+    ax.text(
+        0.01, 0.01,  # Position (ax units)
+        f"Reference Date/Time: {refdatetime.strftime('%Y-%m-%d %H:%M:%S')}",
+        transform=ax.transAxes,
+        fontsize=12,
+        ha="left",
+        va="bottom",
+        bbox=dict(facecolor="white", alpha=0.5, edgecolor="none"),
+    )
+
 def transform_coordinates(lon, lat, projection):
     """Transform geographic coordinates to a specified projection."""
     return projection.transform_points(ccrs.Geodetic(), lon, lat).T
@@ -82,6 +112,9 @@ def main(filepath, output_filename):
     xp, yp, _ = transform_coordinates(lon, lat, to_proj)
     tempx, tempy, temp_grid = interpolate_temperature(xp, yp, temp)
 
+    # Extract reference date and time
+    refdatetime = get_reference_datetime(data)
+
     # Map setup
     fig, ax = setup_map(to_proj, extent)
     levels = list(range(-20, 40, 1))
@@ -94,7 +127,13 @@ def main(filepath, output_filename):
     cbar.set_label("Temperature (°C)", fontsize=18)
     ax.set_title("Surface Temperature - natural_neighbor", fontsize=22)
 
-    plt.savefig(output_filename) #, bbox_inches="tight")
+    # Add date and time from the data
+    add_reference_datetime(ax, refdatetime)
+
+    # minimize the empty area of the figure
+    plt.tight_layout()
+
+    plt.savefig(output_filename, bbox_inches="tight")
     plt.close()
 
 
