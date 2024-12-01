@@ -2,9 +2,6 @@ name: Run interpolation.py manually
 
 on:
   workflow_dispatch:
-  release:
-    types:
-      - published
 
 jobs:
   run-interpolation:
