@@ -10,3 +10,4 @@
 
 ### Changed
 - Add reference date and time and write it on the map
+- Implement tight-layout

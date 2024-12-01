@@ -130,7 +130,10 @@ def main(filepath, output_filename):
     # Add date and time from the data
     add_reference_datetime(ax, refdatetime)
 
-    plt.savefig(output_filename) #, bbox_inches="tight")
+    # minimize the empty area of the figure
+    plt.tight_layout()
+
+    plt.savefig(output_filename, bbox_inches="tight")
     plt.close()
 
 

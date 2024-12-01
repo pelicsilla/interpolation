@@ -8,5 +8,6 @@ install_requires = "requirements.txt"
 features ={
     "INTPOL-1": ["Implement temperature interpolation and mapping"],
     "INTPOL-2": ["Implement add metpy logo on the map"],
-    "INTPOL-3": ["Add reference date and time and write it on the map"]
+    "INTPOL-3": ["Add reference date and time and write it on the map"],
+    "INTPOL-4": ["Implement tight-layout"]
     }
