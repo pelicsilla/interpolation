@@ -1,4 +1,4 @@
-name: Run interpolation.py on Release
+name: Run interpolation.py manually
 
 on:
   workflow_dispatch:

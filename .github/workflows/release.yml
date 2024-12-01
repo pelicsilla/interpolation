@@ -2,8 +2,6 @@ name: Run interpolation.py on Release
 
 on:
   release:
-    types:
-      - published
 
 jobs:
   run-interpolation:
