@@ -30,7 +30,7 @@ jobs:
 
       # Upload the generated PNG as an artifact
       - name: Upload output as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Temp_natural_neighbor
           path: ./Temp_natural_neighbor.png
