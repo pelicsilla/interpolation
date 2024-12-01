@@ -1,6 +1,9 @@
 name: Run interpolation.py on Release
 
-on: release
+on:
+  release:
+    types:
+      - created
 
 jobs:
   run-interpolation:
