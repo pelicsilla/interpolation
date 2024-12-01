@@ -31,18 +31,9 @@ jobs:
       - name: Run interpolation.py
         run: python interpolation.py
 
-      - name: Get Release
-        id: get_release
-        uses: bruceadams/get-release@v1.3.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: basefas/upload-release-asset-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Upload the generated PNG as an artifact
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v3
         with:
-          release_id: ${{ steps.get_release.outputs.id }} # This pulls from the Get RELEASE step above, referencing its ID to get its outputs object, which include a `id`.
-          asset_path: ./Temp_natural_neighbor.png
-          asset_name: Temp_natural_neighbor.png
+          name: Temp_natural_neighbor
+          path: ./Temp_natural_neighbor.png
