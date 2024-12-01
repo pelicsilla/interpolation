@@ -1,6 +1,6 @@
 # my_project/__version__.py
 name = "interpolation"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 description = ("Input temperature (csv) data is interpolated and visualized "
                "using MetPy, cartopy, matplotlib, numpy and pandas packages, and saved to png.")
 python = "3.12"
